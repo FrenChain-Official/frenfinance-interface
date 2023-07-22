@@ -1,31 +1,24 @@
-import { ARBITRUM, ARBITRUM_TESTNET, AVALANCHE, AVALANCHE_FUJI } from "config/chains";
-import arbitrum from "img/ic_arbitrum_24.svg";
-import avalanche from "img/ic_avalanche_24.svg";
-import avalancheTestnet from "img/ic_avalanche_testnet_24.svg";
+import { MANTLE, MANTLE_TESTNET } from "config/chains";
+import MANTLE from "img/mnt.svg";
+import MANTLE_TESTNET from "img/mnt.svg";
 
-import gmxIcon from "img/ic_gmx_40.svg";
-import glpIcon from "img/ic_glp_40.svg";
-import gmxArbitrum from "img/ic_gmx_arbitrum.svg";
-import gmxAvax from "img/ic_gmx_avax.svg";
-import glpArbitrum from "img/ic_glp_arbitrum.svg";
-import glpAvax from "img/ic_glp_avax.svg";
+import gmxIcon from "img/fren.svg";
+import glpIcon from "img/fren.svg";
+import gmxArbitrum from "img/fren.svg";
+import gmxAvax from "img/fren.svg";
+import glpArbitrum from "img/fren.svg";
+import glpAvax from "img/fren.svg";
 
 const ICONS = {
-  [ARBITRUM]: {
-    network: arbitrum,
+  [MANTLE]: {
+    network: MANTLE,
     gmx: gmxArbitrum,
     glp: glpArbitrum,
   },
-  [AVALANCHE]: {
-    network: avalanche,
+  [MANTLE_TESTNET]: {
+    network: MANTLE_TESTNET,
     gmx: gmxAvax,
     glp: glpAvax,
-  },
-  [ARBITRUM_TESTNET]: {
-    network: arbitrum,
-  },
-  [AVALANCHE_FUJI]: {
-    network: avalancheTestnet,
   },
   common: {
     gmx: gmxIcon,

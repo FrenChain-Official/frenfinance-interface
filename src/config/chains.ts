@@ -5,223 +5,95 @@ import { isDevelopment } from "./env";
 
 const { parseEther } = ethers.utils;
 
-export const MAINNET = 56;
-export const TESTNET = 97;
-export const ETH_MAINNET = 1;
-export const AVALANCHE = 43114;
-export const AVALANCHE_FUJI = 43113;
-export const ARBITRUM = 42161;
-export const ARBITRUM_TESTNET = 421611;
+export const MANTLE = 5000;
+export const MANTLE_TESTNET = 5001;
 export const FEES_HIGH_BPS = 50;
 
 // TODO take it from web3
-export const DEFAULT_CHAIN_ID = ARBITRUM;
+export const DEFAULT_CHAIN_ID = MANTLE;
 export const CHAIN_ID = DEFAULT_CHAIN_ID;
 
-export const SUPPORTED_CHAIN_IDS = [ARBITRUM, AVALANCHE];
+export const SUPPORTED_CHAIN_IDS = [MANTLE, MANTLE];
 
 if (isDevelopment()) {
-  SUPPORTED_CHAIN_IDS.push(ARBITRUM_TESTNET, AVALANCHE_FUJI);
+  SUPPORTED_CHAIN_IDS.push(MANTLE_TESTNET);
 }
 
 export const IS_NETWORK_DISABLED = {
-  [ARBITRUM]: false,
-  [AVALANCHE]: false,
+  [MANTLE_TESTNET]: false,
+  [MANTLE]: false,
 };
 
 export const CHAIN_NAMES_MAP = {
-  [MAINNET]: "BSC",
-  [TESTNET]: "BSC Testnet",
-  [ARBITRUM_TESTNET]: "ArbRinkeby",
-  [ARBITRUM]: "Arbitrum",
-  [AVALANCHE]: "Avalanche",
-  [AVALANCHE_FUJI]: "Avalanche Fuji",
+  [MANTLE]: "Mantle",
+  [MANTLE_TESTNET]: "Mantle Testnet",
 };
 
 export const GAS_PRICE_ADJUSTMENT_MAP = {
-  [ARBITRUM]: "0",
-  [AVALANCHE]: "3000000000", // 3 gwei
+  [MANTLE_TESTNET]: "0",
+  [MANTLE]: "3000000000", // 3 gwei
 };
 
 export const MAX_GAS_PRICE_MAP = {
-  [AVALANCHE]: "200000000000", // 200 gwei
+  [MANTLE]: "200000000000", // 200 gwei
 };
 
 export const HIGH_EXECUTION_FEES_MAP = {
-  [ARBITRUM]: 3, // 3 USD
-  [AVALANCHE]: 3, // 3 USD
+  [MANTLE_TESTNET]: 3, // 3 USD
+  [MANTLE]: 3, // 3 USD
 };
 
 const constants = {
-  [MAINNET]: {
-    nativeTokenSymbol: "BNB",
-    defaultCollateralSymbol: "BUSD",
+  [MANTLE]: {
+    nativeTokenSymbol: "MNT",
+    defaultCollateralSymbol: "USDC",
     defaultFlagOrdersEnabled: false,
     positionReaderPropsLength: 8,
     v2: false,
   },
 
-  [TESTNET]: {
-    nativeTokenSymbol: "BNB",
-    defaultCollateralSymbol: "BUSD",
+  [MANTLE_TESTNET]: {
+    nativeTokenSymbol: "MNT",
+    defaultCollateralSymbol: "USDC",
     defaultFlagOrdersEnabled: true,
     positionReaderPropsLength: 8,
     v2: false,
-  },
-
-  [ARBITRUM_TESTNET]: {
-    nativeTokenSymbol: "ETH",
-    defaultCollateralSymbol: "USDC",
-    defaultFlagOrdersEnabled: false,
-    positionReaderPropsLength: 9,
-    v2: true,
-
-    SWAP_ORDER_EXECUTION_GAS_FEE: parseEther("0.0003"),
-    INCREASE_ORDER_EXECUTION_GAS_FEE: parseEther("0.0003"),
-    // contract requires that execution fee be strictly greater than instead of gte
-    DECREASE_ORDER_EXECUTION_GAS_FEE: parseEther("0.000300001"),
-  },
-
-  [ARBITRUM]: {
-    nativeTokenSymbol: "ETH",
-    wrappedTokenSymbol: "WETH",
-    defaultCollateralSymbol: "USDC.e",
-    defaultFlagOrdersEnabled: false,
-    positionReaderPropsLength: 9,
-    v2: true,
-
-    SWAP_ORDER_EXECUTION_GAS_FEE: parseEther("0.0003"),
-    INCREASE_ORDER_EXECUTION_GAS_FEE: parseEther("0.0003"),
-    // contract requires that execution fee be strictly greater than instead of gte
-    DECREASE_ORDER_EXECUTION_GAS_FEE: parseEther("0.000300001"),
-  },
-
-  [AVALANCHE]: {
-    nativeTokenSymbol: "AVAX",
-    wrappedTokenSymbol: "WAVAX",
-    defaultCollateralSymbol: "USDC",
-    defaultFlagOrdersEnabled: true,
-    positionReaderPropsLength: 9,
-    v2: true,
-
-    SWAP_ORDER_EXECUTION_GAS_FEE: parseEther("0.01"),
-    INCREASE_ORDER_EXECUTION_GAS_FEE: parseEther("0.01"),
-    // contract requires that execution fee be strictly greater than instead of gte
-    DECREASE_ORDER_EXECUTION_GAS_FEE: parseEther("0.0100001"),
-  },
-
-  [AVALANCHE_FUJI]: {
-    nativeTokenSymbol: "AVAX",
-    wrappedTokenSymbol: "WAVAX",
-    defaultCollateralSymbol: "USDC",
-    defaultFlagOrdersEnabled: true,
-    positionReaderPropsLength: 9,
-    v2: true,
-
-    SWAP_ORDER_EXECUTION_GAS_FEE: parseEther("0.01"),
-    INCREASE_ORDER_EXECUTION_GAS_FEE: parseEther("0.01"),
-    // contract requires that execution fee be strictly greater than instead of gte
-    DECREASE_ORDER_EXECUTION_GAS_FEE: parseEther("0.0100001"),
   },
 };
 
 const ALCHEMY_WHITELISTED_DOMAINS = ["gmx.io", "app.gmx.io"];
 
 export const RPC_PROVIDERS = {
-  [ETH_MAINNET]: ["https://rpc.ankr.com/eth"],
-  [MAINNET]: [
-    "https://bsc-dataseed.binance.org",
-    "https://bsc-dataseed1.defibit.io",
-    "https://bsc-dataseed1.ninicoin.io",
-    "https://bsc-dataseed2.defibit.io",
-    "https://bsc-dataseed3.defibit.io",
-    "https://bsc-dataseed4.defibit.io",
-    "https://bsc-dataseed2.ninicoin.io",
-    "https://bsc-dataseed3.ninicoin.io",
-    "https://bsc-dataseed4.ninicoin.io",
-    "https://bsc-dataseed1.binance.org",
-    "https://bsc-dataseed2.binance.org",
-    "https://bsc-dataseed3.binance.org",
-    "https://bsc-dataseed4.binance.org",
-  ],
-  [TESTNET]: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
-  [ARBITRUM]: [getDefaultArbitrumRpcUrl()],
-  [ARBITRUM_TESTNET]: ["https://rinkeby.arbitrum.io/rpc"],
-  [AVALANCHE]: ["https://api.avax.network/ext/bc/C/rpc"],
-  [AVALANCHE_FUJI]: ["https://api.avax-test.network/ext/bc/C/rpc"],
+  [MANTLE]: ["https://rpc.mantle.xyz"],
+  [MANTLE_TESTNET]: ["https://rpc.testnet.mantle.xyz"],
 };
 
 export const FALLBACK_PROVIDERS = {
-  [ARBITRUM]: [getAlchemyHttpUrl()],
-  [AVALANCHE]: ["https://avax-mainnet.gateway.pokt.network/v1/lb/626f37766c499d003aada23b"],
+  [MANTLE]: ["https://rpc.mantle.xyz"],
 };
 
 export const NETWORK_METADATA: { [chainId: number]: NetworkMetadata } = {
-  [MAINNET]: {
-    chainId: "0x" + MAINNET.toString(16),
-    chainName: "BSC",
+  [MANTLE]: {
+    chainId: "0x" + MANTLE.toString(16),
+    chainName: "MNT",
     nativeCurrency: {
-      name: "BNB",
-      symbol: "BNB",
+      name: "MNT",
+      symbol: "MNT",
       decimals: 18,
     },
-    rpcUrls: RPC_PROVIDERS[MAINNET],
-    blockExplorerUrls: ["https://bscscan.com"],
+    rpcUrls: RPC_PROVIDERS[MANTLE],
+    blockExplorerUrls: ["https://explorer.mantle.xyz/"],
   },
-  [TESTNET]: {
-    chainId: "0x" + TESTNET.toString(16),
-    chainName: "BSC Testnet",
+  [MANTLE_TESTNET]: {
+    chainId: "0x" + MANTLE_TESTNET.toString(16),
+    chainName: "MNT Testnet",
     nativeCurrency: {
-      name: "BNB",
-      symbol: "BNB",
+      name: "MNT",
+      symbol: "MNT",
       decimals: 18,
     },
-    rpcUrls: RPC_PROVIDERS[TESTNET],
-    blockExplorerUrls: ["https://testnet.bscscan.com/"],
-  },
-  [ARBITRUM_TESTNET]: {
-    chainId: "0x" + ARBITRUM_TESTNET.toString(16),
-    chainName: "Arbitrum Testnet",
-    nativeCurrency: {
-      name: "ETH",
-      symbol: "ETH",
-      decimals: 18,
-    },
-    rpcUrls: RPC_PROVIDERS[ARBITRUM_TESTNET],
-    blockExplorerUrls: ["https://rinkeby-explorer.arbitrum.io/"],
-  },
-  [ARBITRUM]: {
-    chainId: "0x" + ARBITRUM.toString(16),
-    chainName: "Arbitrum",
-    nativeCurrency: {
-      name: "ETH",
-      symbol: "ETH",
-      decimals: 18,
-    },
-    rpcUrls: RPC_PROVIDERS[ARBITRUM],
-    blockExplorerUrls: [getExplorerUrl(ARBITRUM)],
-  },
-  [AVALANCHE]: {
-    chainId: "0x" + AVALANCHE.toString(16),
-    chainName: "Avalanche",
-    nativeCurrency: {
-      name: "AVAX",
-      symbol: "AVAX",
-      decimals: 18,
-    },
-    rpcUrls: RPC_PROVIDERS[AVALANCHE],
-    blockExplorerUrls: [getExplorerUrl(AVALANCHE)],
-  },
-  [AVALANCHE_FUJI]: {
-    chainId: "0x" + AVALANCHE_FUJI.toString(16),
-    chainName: "Avalanche Fuji",
-    nativeCurrency: {
-      name: "AVAX",
-      symbol: "AVAX",
-      decimals: 18,
-    },
-    rpcUrls: RPC_PROVIDERS[AVALANCHE_FUJI],
-    blockExplorerUrls: [getExplorerUrl(AVALANCHE_FUJI)],
+    rpcUrls: RPC_PROVIDERS[MANTLE_TESTNET],
+    blockExplorerUrls: ["https://testnet.mantle.xyz/"],
   },
 };
 
@@ -242,7 +114,7 @@ export function getChainName(chainId: number) {
 }
 
 export function getDefaultArbitrumRpcUrl() {
-  return "https://arb1.arbitrum.io/rpc";
+  return "https://rpc.mantle.xyz";
 }
 
 export function getRpcUrl(chainId: number): string | undefined {
@@ -268,28 +140,16 @@ export function getAlchemyWsUrl() {
 }
 
 export function getExplorerUrl(chainId) {
-  if (chainId === 3) {
-    return "https://ropsten.etherscan.io/";
-  } else if (chainId === 42) {
-    return "https://kovan.etherscan.io/";
-  } else if (chainId === MAINNET) {
-    return "https://bscscan.com/";
-  } else if (chainId === TESTNET) {
-    return "https://testnet.bscscan.com/";
-  } else if (chainId === ARBITRUM_TESTNET) {
-    return "https://testnet.arbiscan.io/";
-  } else if (chainId === ARBITRUM) {
-    return "https://arbiscan.io/";
-  } else if (chainId === AVALANCHE) {
-    return "https://snowtrace.io/";
-  } else if (chainId === AVALANCHE_FUJI) {
-    return "https://testnet.snowtrace.io/";
+  if (chainId === 5000) {
+    return "https://explorer.mantle.xyz/";
+  } else if (chainId === 5001) {
+    return "https://explorer.testnet.mantle.xyz/";
   }
-  return "https://etherscan.io/";
+  return "https://explorer.testnet.mantle.xyz/";
 }
 
 export function getHighExecutionFee(chainId) {
-  return HIGH_EXECUTION_FEES_MAP[chainId] || 3;
+  return HIGH_EXECUTION_FEES_MAP[chainId] || 5000;
 }
 
 export function isSupportedChain(chainId) {
